@@ -1,0 +1,26 @@
+/*
+*/#include <NewPing.h>
+#include <Servo.h>
+int trigPin = 8;
+int echoPin = 4;
+Servo myservo;
+NewPing sensor1(trigPin, echoPin, 200);
+int distance;
+
+void setup() {  // put your setup code here, to run once:  
+pinMode (trigPin, OUTPUT);  
+pinMode (echoPin, INPUT);  
+myservo.attach(7);  
+Serial.begin(9600);
+}
+void loop() {  // put your main code here, to run repeatedly:  
+distance = sensor1.ping_cm();  //closer than 6ft  
+if (distance <= 15) {  //  can be changed to 182.88(6ft)
+myservo.write(90);    
+Serial.println("closed");  
+}
+  
+  else {    
+  myservo.write(0);    
+  Serial.println("Opened");  
+  }}
